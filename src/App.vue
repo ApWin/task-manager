@@ -18,7 +18,6 @@
     <el-button type="primary" @click="saveTask">Confirm</el-button>
   </span>
         </el-dialog>
-        {{this.list4}}
         <el-row style="margin-left: -5px;
     margin-right: -5px;">
             <el-col :span="18" :xs="24" style="padding-left: -5px;
@@ -129,7 +128,9 @@
 
     ];
     const message4 = [
-        {name: 'Task F', title: 'Fix Bug #001'}
+        {name: 'Task A', title: 'Fix Bug #001'},
+        {name: 'Task B', title: 'Refactor using Kotlin'},
+        {name: 'Task C', title: 'There is a bug when user click button X'}
 
     ];
 
