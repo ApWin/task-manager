@@ -7,10 +7,10 @@
                 center>
             <el-form ref="form" label-width="100px">
                 <el-form-item label="Title">
-                    <el-input v-model="payload.name"></el-input>
+                    <el-input v-model="name"></el-input>
                 </el-form-item>
                 <el-form-item label="Description">
-                    <el-input v-model="payload.title"></el-input>
+                    <el-input v-model="title"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -18,6 +18,7 @@
     <el-button type="primary" @click="saveTask">Confirm</el-button>
   </span>
         </el-dialog>
+        {{this.list4}}
         <el-row style="margin-left: -5px;
     margin-right: -5px;">
             <el-col :span="18" :xs="24" style="padding-left: -5px;
@@ -95,10 +96,10 @@
                         </button>
                     </div>
                     <el-col :span="24" :xs="24" style="padding-left: 5px; padding-right: 5px;">
-                        <draggable element="span" v-model="items" v-bind="dragOptions" :move="onMove">
+                        <draggable element="span" v-model="list4" v-bind="dragOptions" :move="onMove">
                             <transition-group name="no" class="list-group" tag="ul">
                                 <el-card class="el-card card-wrapper is-always-shadow"
-                                         v-for="(element,index) in items" :key="index"
+                                         v-for="(element,index) in list4" :key="index"
                                          >
                                     <div class="title"> {{element.name}}
                                     </div>
@@ -127,6 +128,11 @@
         {name: 'Task F', title: 'Fix Bug #001'}
 
     ];
+    const message4 = [
+        {name: 'Task F', title: 'Fix Bug #001'}
+
+    ];
+
 
 
     export default {
@@ -151,20 +157,28 @@
                 list3: message3.map((list, index) => {
                     return {name: list.name, title: list.title, order: index + 1, fixed: false};
                 }),
+                list4: message4.map((list, index) => {
+                    return {name: list.name, title: list.title, order: index + 1, fixed: false};
+                }),
 
                 editable: true,
                 isDragging: false,
                 delayedDragging: false,
                 openModal: false,
-                payload: {
+
                     name: '',
                     title: ''
-                }
+
             }
         },
         methods: {
-           async saveTask() {
-              await  this.items.push(this.payload);
+            saveTask() {
+                this.list4.push({
+                        name:this.name,
+                        title:this.title
+                    }
+
+                );
 
                 this.openModal = false;
 
@@ -179,8 +193,8 @@
                 );
             },
             addItem() {
-                this.payload.name = ''
-                this.payload.title = ''
+                this.name = ''
+                this.title = ''
                 this.openModal = true;
             },
             closeModal() {
